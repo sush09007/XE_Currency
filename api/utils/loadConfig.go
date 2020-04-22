@@ -22,3 +22,8 @@ func GetConfig(keyName string) string {
 	keyValue := viper.GetString(keyName)
 	return keyValue
 }
+
+func GetStringSlice(keyName string) []string {
+	keyValue := viper.GetStringSlice(keyName)
+	return keyValue
+}

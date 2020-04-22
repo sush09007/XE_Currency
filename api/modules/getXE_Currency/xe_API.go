@@ -39,8 +39,7 @@ func RequestXEForData(from, to string, wg *sync.WaitGroup, i int) (XE_Currency_R
 		log.Fatal("Error in UnMarshaling Response", err)
 		return
 	}
-
-	err = insertDB(XE_Currency_Response)
+	err = updateDB(XE_Currency_Response)
 	if err != nil {
 		log.Fatal("Error in Insert", err)
 		return
