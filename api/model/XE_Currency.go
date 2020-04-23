@@ -13,3 +13,8 @@ type XE_Currency_Response struct {
 		Mid           float64 `json:"mid"1`
 	} `json:"to"`
 }
+
+type ErrorResponse struct {
+	Code    int    `json:"code"`
+	Message string `json:"message"`
+}

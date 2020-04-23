@@ -8,5 +8,6 @@ import (
 func main() {
 	utils.InitViper()
 	getXE_Currency.InitTable()
+	getXE_Currency.InitCurrencies()
 	getXE_Currency.InitJob()
 }

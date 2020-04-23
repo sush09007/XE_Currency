@@ -29,3 +29,10 @@ Please ensure you have config.json file to run the project.
 
 
 To-do : writing test cases
+
+goos: linux
+goarch: amd64
+pkg: XE_Currency
+Benchmark_InitJob-4            1        2758207762 ns/op
+PASS
+ok      XE_Currency     2.766s

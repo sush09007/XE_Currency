@@ -4,11 +4,11 @@ import (
 	"XE_Currency/api/model"
 	"XE_Currency/api/utils"
 	"fmt"
-	_"github.com/lib/pq"
+	_ "github.com/lib/pq"
 	"log"
 	"strconv"
 	"strings"
-	_"time"
+	_ "time"
 )
 
 var createTableString = `CREATE TABLE IF NOT EXISTS public.exchange_rates(
@@ -84,7 +84,7 @@ func updateDB(Resp model.XE_Currency_Response) (err error) {
 	}
 	defer db.Close()
 
-	query, args:= BulkInsert(Resp)
+	query, args := BulkInsert(Resp)
 
 	query += upsertQuery
 
@@ -108,4 +108,3 @@ func updateDB(Resp model.XE_Currency_Response) (err error) {
 	log.Printf("affected = %d\n", rowCnt)
 	return
 }
-
