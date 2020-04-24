@@ -1,20 +1,23 @@
-package utils
+package config
 
 import (
-	"fmt"
-
+	logger "github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 )
 
 //InitViper function to initialize viper
-func InitViper() {
-	viper.SetConfigName("config") // name of config file (without extension)
-	viper.AddConfigPath(".")      // optionally look for config in the working directory
+func InitConfig() error {
+
+	viper.SetConfigName("config")
+	viper.AddConfigPath(".")
+
 	err := viper.ReadInConfig()
-	// Find and read the config file
-	if err != nil { // Handle errors reading the config file
-		panic(fmt.Errorf("Fatal error config file %s ", err))
+	if err != nil {
+		logger.WithField("error config file", err.Error()).Error("Cannot initialize config")
+		return err
 	}
+	logger.WithField("msg", "initialize successfully").Info("Initialized config")
+	return nil
 }
 
 //GetConfig method to get configs from config file

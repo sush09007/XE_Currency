@@ -2,7 +2,7 @@ package model
 
 import "time"
 
-type XE_Currency_Response struct {
+type XEcurrency struct {
 	Terms     string    `json:"terms"`
 	Privacy   string    `json:"privacy"`
 	From      string    `json:"from"`
@@ -10,11 +10,16 @@ type XE_Currency_Response struct {
 	Timestamp time.Time `json:"timestamp"`
 	To        []struct {
 		Quotecurrency string  `json:"quotecurrency"`
-		Mid           float64 `json:"mid"1`
+		Mid           float64 `json:"mid"`
 	} `json:"to"`
 }
 
 type ErrorResponse struct {
 	Code    int    `json:"code"`
 	Message string `json:"message"`
+}
+
+type Result struct {
+	message string
+	err     error
 }
