@@ -1,7 +1,10 @@
 package service
 
 import (
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
+	"net/http"
 	"strconv"
 	"xe-currency/config"
 	"xe-currency/db"
@@ -45,9 +48,12 @@ func job(from, to string, wg *sync.WaitGroup) {
 	if err != nil {
 		return
 	}
-	_ = resp
+	r,err := unMarshalRespose(resp)
+	if err != nil {
+		return
+	}
 
-	query, args := updateQuery(resp)
+	query, args := updateQuery(r)
 
 	result, err := db.ExecQuery(query, args)
 	if err != nil {
@@ -61,6 +67,32 @@ func job(from, to string, wg *sync.WaitGroup) {
 		return
 	}
 	logger.WithField("affected rows", rowCnt).Info("Update DB Successful")
+	return
+}
+
+func unMarshalRespose(resp *http.Response) (xe_resp model.XEcurrency, err error){
+	r, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		logger.WithField("response", err.Error()).Error("Reading Response Failed")
+		return
+	}
+
+	err = json.Unmarshal(r, &xe_resp)
+	if err != nil {
+		logger.WithField("error in unmarshalling response", err.Error()).Error("Reading Response Failed")
+		return
+	}
+
+	if xe_resp.From == "" || len(xe_resp.To) == 0 {
+		err_resp := model.ErrorResponse{}
+		err = json.Unmarshal(r, &err_resp)
+		if err != nil {
+			logger.WithField("error in unmarshalling response", err.Error()).Error("Reading Response Failed")
+			return
+		}
+		logger.WithField("error in in response from api", err_resp.Message).Error("API Failed")
+		return
+	}
 	return
 }
 

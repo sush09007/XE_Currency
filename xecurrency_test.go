@@ -8,7 +8,6 @@ import (
 	logger "github.com/sirupsen/logrus"
 )
 
-
 func Test_Init(t *testing.T) {
 	logger.SetFormatter(&logger.TextFormatter{
 		FullTimestamp:   true,

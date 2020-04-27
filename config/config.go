@@ -6,9 +6,9 @@ import (
 )
 
 //InitViper function to initialize viper
-func InitConfig() error {
+func InitConfig(path string) error {
 
-	viper.SetConfigName("config")
+	viper.SetConfigName(path)
 	viper.AddConfigPath(".")
 
 	err := viper.ReadInConfig()

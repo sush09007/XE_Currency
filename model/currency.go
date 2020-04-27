@@ -3,10 +3,10 @@ package model
 import "time"
 
 type XEcurrency struct {
-	Terms     string    `json:"terms"`
-	Privacy   string    `json:"privacy"`
+	// Terms     string    `json:"terms"`
+	// Privacy   string    `json:"privacy"`
 	From      string    `json:"from"`
-	Amount    float64   `json:"amount"`
+	// Amount    float64   `json:"amount"`
 	Timestamp time.Time `json:"timestamp"`
 	To        []struct {
 		Quotecurrency string  `json:"quotecurrency"`
